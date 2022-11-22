@@ -1,3 +1,4 @@
+/* css variables for colors */
 :root {
   --blue: #dcfffdff;
   --red: #d36135ff;
@@ -55,6 +56,10 @@ footer img {
   margin: 5px;
 }
 
+.hide {
+ height: 1px; 
+}
+
 /* modal styles*/
 /* The Modal (background) */
 .modal {
@@ -76,7 +81,13 @@ footer img {
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 600px; /* Could be more or less, depending on screen size */
+}
+
+.modal-content img{
+    width: 250px;
+    margin: 0 auto;
+    display: block;
 }
 
 /* The Close Button */
@@ -93,4 +104,5 @@ footer img {
   text-decoration: none;
   cursor: pointer;
 }
+
 
