@@ -5,7 +5,8 @@ let points = 0; //plant a cookie to keep track of points?
 let nextBadgeIndex = 0;
 let pointsSpan = document.querySelector('#points'); //grabs the points span from dom and store in a variable
 let vidInterval;
-let video_data = document.getElementById("video"); //will grab the video element, works with youtube iframe!
+// let video_data = document.getElementById("video"); //will grab the video element, works with youtube iframe!
+// let video_data = document.querySelector("video"); //will grab the video element, works with youtube iframe!
 let bottomHit = false;
 let questionNum = 0;
 
@@ -13,7 +14,6 @@ let questionNum = 0;
 let modal = document.getElementById("badgeModal"); // Get the modal
 let btn = document.getElementById("myBtn"); //button for testing the modal
 let span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
-
 //Event Listeners, listen for like clicks, scrolling, and video play
 //When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
@@ -28,12 +28,14 @@ span.onclick = function() {
 }
 
 //video event listener
-video_data.addEventListener("play", videoStartedPlaying);
-video_data.addEventListener("pause", videoPaused);
-video_data.addEventListener("ended", videoOver);
+// video_data.addEventListener("play", videoStartedPlaying);
+// video_data.addEventListener("pause", videoPaused);
+// video_data.addEventListener("ended", videoOver);
 
-//setup the quiz
-setupQuiz();
+//Quiz stuff
+let check = document.getElementById("check");
+check.addEventListener("click", checkQuiz);
+updateQuiz(); //display the quiz questions
 
 //functions
 
@@ -132,16 +134,68 @@ function launchModal(bData) {
   modal.querySelector('.badge-description').innerHTML = bData.desc;
 }
 
-function setupQuiz(){
+function updateQuiz(){
+  //clear any old status messages
+  let status = document.querySelector("#status");
+  status.style.display = "none";
+
   //get the form
-  document.querySelector('#quiz');
-  for(let i = 0; i < questions.length; i++){
+  let quiz = document.querySelector('#quiz');
+  quiz.innerHTML = "";
+  if(questionNum < questions.length){
     let q = questions[questionNum];
-    debugger;
-    let radio  = document.createElement("INPUT");
-    radio.setAttribute("type", "radio");
-    radio.setAttribute("value", );
-    // <!-- <input type="radio" id="a" name="ans_choice" value=""> <label for="a">??</label><br> -->
+
+    let title = document.createElement("H3");
+    title.innerHTML = q.question;
+    quiz.append(title);
+
+    for (let choice in q.multi) {
+
+      let radio  = document.createElement("INPUT");
+      radio.setAttribute("type", "radio");
+      radio.setAttribute("id", choice);
+      radio.setAttribute("value", q.multi[choice]);
+      radio.setAttribute("name", "ans_choice");
+      quiz.append(radio);
+
+      let label = document.createElement("label");
+      label.setAttribute("for", choice);
+      label.innerHTML = q.multi[choice];
+      quiz.append(label);
+
+      quiz.append(document.createElement("br"));
+    }
+  } else {
+    let title = document.createElement("H3");
+    title.innerHTML = "No More Questions";
+    quiz.append(title);
+    //remove the check button
+    check.remove();
   }
 }
 
+function checkQuiz(){
+  let answer = questions[questionNum].ans;
+
+  let radios = document.querySelectorAll("input")
+  for(let i = 0; i < radios.length; i++){
+    if(radios[i].checked){
+      console.log(radios[i].value);
+      console.log(radios[i].id);
+
+      if(radios[i].id == answer){
+
+        points += 10; //add points
+        update(); //update the points
+
+        questionNum++;
+        updateQuiz();
+      } else {
+        let quiz = document.querySelector('#quiz');
+
+        let status = document.querySelector("#status");
+        status.style.display = "block";
+      }
+    }
+  }
+}
