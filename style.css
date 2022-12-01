@@ -11,6 +11,7 @@ body {
   font-family: 'Nunito Sans', sans-serif;
   background: #e2e1e0;
   margin-bottom: 120px;
+  font-size: 18px;
 }
 
 #score {
@@ -22,6 +23,22 @@ body {
   background-color: #FFF;
   border: 1px solid;
   border-radius: 10px;
+}
+ 
+a {
+  color: var(--green);
+}
+
+a:hover {
+  color: var(--orange);
+}
+
+h2 {
+  margin-bottom: -10px;
+}
+
+h3 {
+  margin-bottom: 0px;
 }
 
 #points {
@@ -104,4 +121,6 @@ footer img {
   cursor: pointer;
 }
 
-
+label {
+  margin-left: 5px;
+}

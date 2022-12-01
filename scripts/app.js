@@ -5,7 +5,7 @@ let points = 0; //plant a cookie to keep track of points?
 let nextBadgeIndex = 0;
 let pointsSpan = document.querySelector('#points'); //grabs the points span from dom and store in a variable
 let vidInterval;
-// let video_data = document.getElementById("video"); //will grab the video element, works with youtube iframe!
+let video_data = document.getElementById("video"); //will grab the video element, works with youtube iframe!
 // let video_data = document.querySelector("video"); //will grab the video element, works with youtube iframe!
 let bottomHit = false;
 let questionNum = 0;
@@ -28,9 +28,9 @@ span.onclick = function() {
 }
 
 //video event listener
-// video_data.addEventListener("play", videoStartedPlaying);
-// video_data.addEventListener("pause", videoPaused);
-// video_data.addEventListener("ended", videoOver);
+video_data.addEventListener("play", videoStartedPlaying);
+video_data.addEventListener("pause", videoPaused);
+video_data.addEventListener("ended", videoOver);
 
 //Quiz stuff
 let check = document.getElementById("check");
@@ -70,11 +70,11 @@ function updateFooter(bData){
   foot.append(badge); //append to parent
 }
 
-function vidPoints(){
-  console.log("video points");
-  points+=10;
-  update();
-}
+// function vidPoints(){
+//   // console.log("video points");
+//   // points+=5;
+// update();
+// }
 
 //see when you have got to the bottom of the screen
 
@@ -105,14 +105,20 @@ window.onscroll = function() {
 // video callback function
 function videoStartedPlaying(){
   console.log("play");
-  //create a js timeout that start give points for each x seconds watched
-  // setTimeout(function() {console.log("time")}, 100);
-  vidInterval = setInterval(vidPoints, 1000);
+  //setInterval will fire a function after x amount of seconds. 
+  //setInterval must be stored in a variable so that that you can clear the interval function
+  //The first parameter is a function, here we are using an anonymous function as the callback 
+  //The second parameter is a time, here we set the interval to fire every 1000 milliseconds or 1 second. 
+  vidInterval = setInterval(function(){
+    console.log("video points");
+    points+=5;
+    update();
+  }, 1000);
 }
 
 function videoPaused(){
   console.log("paused");
-  //pause event listener to stop the timeout
+  //This stops the setInterval function
   clearInterval(vidInterval);
 }
 
