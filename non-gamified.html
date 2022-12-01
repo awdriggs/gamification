@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/addons/p5.sound.min.js"></script><!-- planck -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,600;1,600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Gamification</title>
+</head>
+<body>
+
+  <div class="wrapper">
+    <h1 id="main-title">Gamification</h1>
+
+    <p>Gamification is when game mechanics are applied to non-game, non-entertainment purposes. This often means adding points, badges, leaderboards, levels and quests to non-game activities.</p>
+    <p>Gamification has been applied to many different types of websites and apps. Everything from fitness trackers like <a href="https://www.apple.com/watch/close-your-rings/" target=”_blank”>Apple's Fitness Rings</a> to apps like <a href="http://www.chorewars.com/" target=”_blank”>Chore Wars</a> which makes a doing household chores into a game like activity.</p>
+    <p>At its best, gamification is thought to increase motivation. At its worse it can be used to manipulate people into changing their behaviors by adding incentives like points and prizes. For example, the <a href="https://www.nytimes.com/interactive/2017/04/02/technology/uber-drivers-psychological-tricks.html" target=”_blank”>New York Times article</a> describes how Uber has used gamification to get drivers to drive more trips.</p> 
+    <p>The purpose of this website is to experience "generic gamification." Points and badges have been added to increase your motivation to learn more about gamification. Does it work for you?</p>
+
+    <h2>Let's Get Started</h2>
+    <p>Watch this video to learn more about gamification.</p>
+    <video id="video" width="900" controls=""><source src="./assets/gamication_video.mp4" type="video/mp4"> Your browser does not support HTML video.</video> <!-- Trigger/Open The Modal , for testing-->
+
+    <h2>Click Game</h2>
+    <p>Clicking is one of the most basic actions we do online. But what happens if this act was gamified? Does it change how many times you click?</p>
+    <div id='p5-container'>
+    </div>
+    <!-- this is to stop the click game from highlighting all the text -->
+    <br class="hide">
+    <p>This is a simplified clone of Cookie Clicker, originally created as a website in 2013, it is being downloaded on Steam over 1.1 million times. That is a lot of clicks!</p>  
+    <!-- quiz show -->
+    
+    <h2>Gamification and Education</h2>
+
+    <h2>What the Research Says</h2>
+
+  </div>
+  <!-- end of wrapper -->
+
+
+  <!-- The Modal, thanks w3 schools! -->
+
+  <!-- putting all the scripts at the end gives dom time to load -->
+  <script src="./scripts/data.js"></script> 
+  <script src="./scripts/game.js"></script> 
+  <script src="./scripts/app.js"></script>
+</body>
+</html>
