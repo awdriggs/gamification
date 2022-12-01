@@ -5,7 +5,7 @@ let radius = 200; //image will be 400px, so radius is half
 function preload() {
   soundFormats('wav');
   clickSound = loadSound('assets/sound.wav');
-  cookie = loadImage('../assets/cookie.png'); //load the image before starting the sketch
+  cookie = loadImage('assets/cookie.png'); //load the image before starting the sketch
 }
 
 function setup() {
