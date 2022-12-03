@@ -124,3 +124,7 @@ footer img {
 label {
   margin-left: 5px;
 }
+
+.stretch {
+  width: 100%;
+}

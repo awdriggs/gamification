@@ -4,12 +4,13 @@ console.log("working bro");
 let points = 0; //plant a cookie to keep track of points?
 let nextBadgeIndex = 0;
 let pointsSpan = document.querySelector('#points'); //grabs the points span from dom and store in a variable
-let vidInterval;
-let video_data = document.getElementById("video"); //will grab the video element, works with youtube iframe!
-// let video_data = document.querySelector("video"); //will grab the video element, works with youtube iframe!
+
 let bottomHit = false;
 let questionNum = 0;
-
+ 
+// sound effect
+var audio = new Audio('../assets/sound.wav');
+ 
 // Modal business, w3 schools
 let modal = document.getElementById("badgeModal"); // Get the modal
 let btn = document.getElementById("myBtn"); //button for testing the modal
@@ -21,16 +22,35 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+ 
+// Give a point for every linked clicked
+let links = document.querySelectorAll("a");
+for(let a of links){
+  a.addEventListener("click", linkClicked);
+}
+ 
+function linkClicked(e){
+  console.log(e);
+  e.target.removeEventListener("click", linkClicked); //remove the event listener, you only get points the first time you click it!
+  points+=10;
+  update();
+}
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
   modal.style.display = "none";
 }
 
-//video event listener
-video_data.addEventListener("play", videoStartedPlaying);
-video_data.addEventListener("pause", videoPaused);
-video_data.addEventListener("ended", videoOver);
+//Video Business
+let videos = document.querySelectorAll("video"); //will grab all the video elements, 
+let vidInterval; //used to turn on and off the video interval
+
+//add the event listeners to every video
+for(let video_data of videos){
+  video_data.addEventListener("play", videoStartedPlaying);
+  video_data.addEventListener("pause", videoPaused);
+  video_data.addEventListener("ended", videoOver);
+}
 
 //Quiz stuff
 let check = document.getElementById("check");
@@ -54,11 +74,7 @@ function update(){
 
     nextBadgeIndex++; //que up for the next badge
   }
-
-  // no more badges! just do nothing instead?
-  // if(points >= 800){
-  //   alert("You've completed the gamification quest!");
-  // }
+  audio.play();
 }
 
 function updateFooter(bData){
@@ -70,15 +86,8 @@ function updateFooter(bData){
   foot.append(badge); //append to parent
 }
 
-// function vidPoints(){
-//   // console.log("video points");
-//   // points+=5;
-// update();
-// }
 
 //see when you have got to the bottom of the screen
-
-//window.innerHeight + window.scrollY
 window.onscroll = function() {
   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
     // you're at the bottom of the page
@@ -91,12 +100,6 @@ window.onscroll = function() {
 
   }
 };
-// quiz show? how have questions about gamification to answer stored as a json file.
-// get a random value from the questons index
-// use values to populate a form
-// user clicks button to check if their answer is write, points given for each correct answer, 10 points?
-// points taken away for each answer.
-// ex questons = [{question: "what color is sky?", multi: [a: "red", b: "blue", c: "green", d: "black"], ans: c}],
 
 // VIDEO STUFF!
 // see if the user is watched the video, give them so points for every x seconds watched
@@ -105,10 +108,10 @@ window.onscroll = function() {
 // video callback function
 function videoStartedPlaying(){
   console.log("play");
-  //setInterval will fire a function after x amount of seconds. 
+  //setInterval will fire a function after x amount of seconds.
   //setInterval must be stored in a variable so that that you can clear the interval function
-  //The first parameter is a function, here we are using an anonymous function as the callback 
-  //The second parameter is a time, here we set the interval to fire every 1000 milliseconds or 1 second. 
+  //The first parameter is a function, here we are using an anonymous function as the callback
+  //The second parameter is a time, here we set the interval to fire every 1000 milliseconds or 1 second.
   vidInterval = setInterval(function(){
     console.log("video points");
     points+=5;
@@ -129,7 +132,6 @@ function videoOver(){
   update();
 }
 
-
 // When the user clicks on the button, open the modal
 function launchModal(bData) {
   modal.style.display = "block"; //swap from hiddent to block
@@ -140,6 +142,7 @@ function launchModal(bData) {
   modal.querySelector('.badge-description').innerHTML = bData.desc;
 }
 
+ 
 function updateQuiz(){
   //clear any old status messages
   let status = document.querySelector("#status");
