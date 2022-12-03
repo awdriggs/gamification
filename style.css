@@ -14,7 +14,7 @@ body {
   font-size: 18px;
 }
 
-#score {
+.score {
   position: fixed;
   top: 20px;
   right: 20px;
@@ -24,7 +24,7 @@ body {
   border: 1px solid;
   border-radius: 10px;
 }
- 
+
 a {
   color: var(--green);
 }
@@ -73,7 +73,7 @@ footer img {
 }
 
 .hide {
- height: 1px; 
+  height: 1px;
 }
 
 /* modal styles*/
@@ -101,9 +101,9 @@ footer img {
 }
 
 .modal-content img{
-    width: 250px;
-    margin: 0 auto;
-    display: block;
+  width: 250px;
+  margin: 0 auto;
+  display: block;
 }
 
 /* The Close Button */
@@ -128,3 +128,18 @@ label {
 .stretch {
   width: 100%;
 }
+
+/* animation for keyframes page */
+/* @keyframes blink{ */
+/*   to { */
+/*     background-color: var(--green); */
+/*   } */
+/* } */
+
+.blink{
+  /* visibility: hidden; */
+  /* animation: blink 0.1s; */
+  background-color: var(--green);
+  /* transition: background-color 0.2s; */
+}
+
